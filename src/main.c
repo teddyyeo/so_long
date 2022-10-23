@@ -3,44 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tayeo <tayeo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tayeo <tayeo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 16:22:14 by tayeo             #+#    #+#             */
-/*   Updated: 2022/10/22 21:55:43 by tayeo            ###   ########.fr       */
+/*   Updated: 2022/10/23 17:15:52 by tayeo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+void	move(int pos, t_vars *vars)
+{
+	char	p;
+
+	p = vars->map[pos];
+	if (p != '1' && (p != 'E' || vars->item == 0))
+	{
+		put_img(vars, vars->img[2], vars->player); // overwrite with background image
+		put_img(vars, vars->img[2], pos); // overwrite with background image
+		put_img(vars, vars->img[1], pos);// put player image to position
+		if (p == 'E') //if all items are collected and player reached exit
+			exit(EXIT_SUCCESS); // end game
+		else if (vp == 'C') // if there is a collectible at the position
+			vars->item--; //reduce item count
+		vars->map[vars->player] == '0';
+		p == 'P';
+		vars->player = pos;
+	}
+}
+
 int	key(int keycode, t_vars *vars)
 {
-	int	new_pos;
 	if (keycode == ESC)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
 		exit(0);
 	}
 	else if (keycode == W)
-	{
-		new_pos = vars->player - (vars->w / 32);
-		ft_printf("pos: %d\n", new_pos);
-		ft_printf("%c\n", vars->map[new_pos]);
-		ft_printf("pos: %d\n", vars->player);
-		put_img(vars, vars->img[1], new_pos);
-		vars->player = new_pos;
-	}
+		move(vars->player - (vars->w / 32), vars);
 	else if (keycode == A)
-	{
-		new_pos = vars->player - 1;
-	}
+		move(vars->player - 1, vars);
 	else if (keycode == S)
-	{
-		new_pos = vars->player + (vars->w / 32);
-	}
+		move(vars->player + (vars->w / 32), vars);
 	else if (keycode == D)
-	{
-		new_pos = vars->player + 1;
-	}
+		move(vars->player + 1, vars);
 	return (0);
 }
 

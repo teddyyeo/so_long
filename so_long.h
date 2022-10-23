@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tayeo <tayeo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tayeo <tayeo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 16:28:20 by tayeo             #+#    #+#             */
-/*   Updated: 2022/10/22 21:52:58 by tayeo            ###   ########.fr       */
+/*   Updated: 2022/10/23 16:45:02 by tayeo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_vars {
 	int		w;
 	char	*map;
 	int		player;
+	int		item;
 	void	*img[5];
 }				t_vars;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tayeo <tayeo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tayeo <tayeo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 19:23:00 by tayeo             #+#    #+#             */
-/*   Updated: 2022/10/22 18:02:24 by tayeo            ###   ########.fr       */
+/*   Updated: 2022/10/23 16:46:15 by tayeo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	check(int fd, t_vars *vars)
 	vars->w = (int)ft_strlen(prev) * 32;
 	free(prev);
 	object_check(map);
+	vars->item = map.item;
 	write(1, "\nGOOD Map!\n", 11);
 }
 
