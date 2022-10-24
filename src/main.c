@@ -6,7 +6,7 @@
 /*   By: tayeo <tayeo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 16:22:14 by tayeo             #+#    #+#             */
-/*   Updated: 2022/10/23 17:15:52 by tayeo            ###   ########.fr       */
+/*   Updated: 2022/10/24 13:02:23 by tayeo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ void	move(int pos, t_vars *vars)
 		p == 'P';
 		vars->player = pos;
 	}
+}
+
+void	on_exit(t_vars *vars)
+{
+	mlx_destroy_window(vars->mlx, vars->win);
+	exit(EXIT_SUCCESS);
 }
 
 int	key(int keycode, t_vars *vars)
@@ -79,6 +85,7 @@ int	main(int argc, char **argv)
 	draw(&vars, vars.img);
 	close(map);
 	mlx_key_hook(vars.win, key, &vars);
+	mlx_hook(vars.win, 17, 0, on_exit, &vars);
 	mlx_loop(vars.mlx);
 	return (0);
 }
