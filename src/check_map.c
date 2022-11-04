@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tayeo <tayeo@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: tayeo <tayeo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 19:23:00 by tayeo             #+#    #+#             */
-/*   Updated: 2022/10/23 16:46:15 by tayeo            ###   ########.fr       */
+/*   Updated: 2022/10/24 18:17:30 by tayeo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	find_object(char *line, t_map *map)
 		{
 			if (map->player == 1)
 			{
-				write(1, "\nMap Error: More than one player!\n", 35);
+				write(1, "\nError\n: More than one player!\n", 32);
 				free(line);
 				exit(EXIT_FAILURE);
 			}
@@ -38,17 +38,17 @@ void	object_check(t_map map)
 {
 	if (map.player == 0)
 	{
-		write(1, "\nMap Error: No player!\n", 24);
+		write(1, "\nError\n: No player!\n", 21);
 		exit(EXIT_FAILURE);
 	}
 	else if (map.item == 0)
 	{
-		write(1, "\nMap Error: No item!\n", 22);
+		write(1, "\nError\n: No item!\n", 19);
 		exit(EXIT_FAILURE);
 	}
 	else if (map.exit == 0)
 	{
-		write(1, "\nMap Error: No exit!\n", 22);
+		write(1, "\nError\n: No exit!\n", 19);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -84,10 +84,9 @@ void	check(int fd, t_vars *vars)
 	x_wall_check(prev);
 	vars->h = idx * 32;
 	vars->w = (int)ft_strlen(prev) * 32;
+	vars->item_cnt = map.item;
 	free(prev);
 	object_check(map);
-	vars->item = map.item;
-	write(1, "\nGOOD Map!\n", 11);
 }
 
 void	check_map(char *filename, t_vars *vars)

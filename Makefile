@@ -6,13 +6,13 @@
 #    By: tayeo <tayeo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/15 16:22:19 by tayeo             #+#    #+#              #
-#    Updated: 2022/10/22 17:49:14 by tayeo            ###   ########.fr        #
+#    Updated: 2022/10/24 18:16:09 by tayeo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME  = so_long
 
-SRC = src/main.c src/check_map.c src/check_map2.c src/check_file.c src/draw.c
+SRC = src/main.c src/check_map.c src/check_map2.c src/check_file.c src/draw.c src/hook.c src/init_rsc.c
 OBJ = ${SRC:.c=.o}
 
 FLAG = -Werror -Wall -Wextra -D BUFFER_SIZE=1
@@ -46,4 +46,4 @@ n: $(SRC)
 	norminette -R CheckForbiddenSourceHeader src libft
 	norminette -R CheckDefine so_long.h
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re n

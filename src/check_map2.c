@@ -6,7 +6,7 @@
 /*   By: tayeo <tayeo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 17:14:36 by tayeo             #+#    #+#             */
-/*   Updated: 2022/10/21 17:51:47 by tayeo            ###   ########.fr       */
+/*   Updated: 2022/10/24 18:18:13 by tayeo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	x_wall_check(char *line)
 	{
 		if (*line != '1')
 		{
-			write(1, "\nMap Error: Vertical wall is breached!\n", 39);
+			write(1, "\nError\n: Vertical wall is breached!\n", 36);
 			free(line);
 			exit(EXIT_FAILURE);
 		}
@@ -31,7 +31,7 @@ void	y_wall_check(char *line)
 {
 	if (*line != '1' || line[ft_strlen(line) - 2] != '1')
 	{
-		write(1, "\nMap Error: Horizontal wall is breached!\n", 41);
+		write(1, "\nError\n: Horizontal wall is breached!\n", 38);
 		free(line);
 		exit(EXIT_FAILURE);
 	}
@@ -41,7 +41,7 @@ void	rectangle_check(char *line, char **prev)
 {
 	if (ft_strlen(line) != ft_strlen(*prev))
 	{
-		write(1, "\nMap Error: Not rectangle!\n", 28);
+		write(1, "\nError\n: Not rectangle!\n", 25);
 		free(line);
 		free(*prev);
 		exit(EXIT_FAILURE);
@@ -54,7 +54,7 @@ void	empty_check(char *line)
 {
 	if (line == NULL)
 	{
-		write(1, "\nMap Error: Line is empty!\n", 28);
+		write(1, "\nError\n: Line is empty!\n", 25);
 		exit(EXIT_FAILURE);
 	}
 }

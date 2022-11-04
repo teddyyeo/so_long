@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tayeo <tayeo@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: tayeo <tayeo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/15 16:28:20 by tayeo             #+#    #+#             */
-/*   Updated: 2022/10/23 16:45:02 by tayeo            ###   ########.fr       */
+/*   Updated: 2022/10/24 18:15:38 by tayeo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,6 @@
 # define D			2
 
 /*
-**	Struct for image
-*/
-typedef struct s_data {
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		len;
-	int		endian;
-}				t_data;
-
-/*
 **	Struct for mlx data
 */
 typedef struct s_vars {
@@ -45,20 +34,16 @@ typedef struct s_vars {
 	int		h;
 	int		w;
 	char	*map;
-	int		player;
-	int		item;
-	void	*img[5];
+	int		position;
+	int		item_cnt;
+	void	*wall;
+	void	*exit;
+	void	*player;
+	void	*item;
+	void	*ground;
+	int		move_cnt;
+	void	*num[10];
 }				t_vars;
-
-/*
-**	Struct for xmp file, store filepath in path
-**	set width and height with xpm_file_to_image
-*/
-typedef struct s_xpm {
-	char	*path;
-	int		width;
-	int		height;
-}				t_xpm;
 
 /*
 ** Struct needed for map check
@@ -72,9 +57,9 @@ typedef struct s_map {
 void	find_object(char *line, t_map *map);
 void	object_check(t_map map);
 void	init_object_to_zero(t_map *map);
-
 void	check(int fd, t_vars *vars);
 void	check_map(char *filename, t_vars *vars);
+
 void	x_wall_check(char *line);
 void	y_wall_check(char *line);
 void	rectangle_check(char *line, char **prev);
@@ -85,6 +70,15 @@ void	extension_check(char *str);
 void	open_check(int fd);
 
 void	save_map(char *filename, t_vars *vars);
-void	draw(t_vars *vars, void **img);
+void	draw(t_vars *vars);
 void	put_img(t_vars *vars, void *img, int idx);
+
+void	move(int pos, t_vars *vars);
+int		on_exit(t_vars *vars);
+int		key(int keycode, t_vars *vars);
+
+void	print_num(t_vars vars);
+
+void	set_num(t_vars *vars);
+void	set_image(t_vars *vars);
 #endif

@@ -3,31 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tayeo <tayeo@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: tayeo <tayeo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 19:38:35 by tayeo             #+#    #+#             */
-/*   Updated: 2022/10/23 16:35:14 by tayeo            ###   ########.fr       */
+/*   Updated: 2022/10/24 18:06:32 by tayeo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	draw_wall(t_vars *vars, void *img)
+static void	draw_ground(t_vars *vars, void	*img)
 {
-	int		idx;
+	int	idx;
+	int	jdx;
 
 	idx = 0;
 	while (idx < vars->h)
 	{
-		mlx_put_image_to_window(vars->mlx, vars->win, img, 0, idx);
-		mlx_put_image_to_window(vars->mlx, vars->win, img, vars->w - 32, idx);
-		idx += 32;
-	}
-	idx = 0;
-	while (idx < vars->w)
-	{
-		mlx_put_image_to_window(vars->mlx, vars->win, img, idx, 0);
-		mlx_put_image_to_window(vars->mlx, vars->win, img, idx, vars->h - 32);
+		jdx = 0;
+		while (jdx < vars->w - 32)
+		{
+			mlx_put_image_to_window(vars->mlx, vars->win, img, jdx, idx);
+			jdx += 32;
+		}
 		idx += 32;
 	}
 }
@@ -57,27 +55,28 @@ void	put_img(t_vars *vars, void *img, int idx)
 
 	x = (idx % (vars->w / 32)) * 32;
 	y = (idx / (vars->w / 32)) * 32;
-	ft_printf("(x, y) = (%d, %d)\n", x/32, y/32);
 	mlx_put_image_to_window(vars->mlx, vars->win, img, x, y);
 }
 
-void	draw(t_vars *vars, void **img)
+void	draw(t_vars *vars)
 {
 	int	idx;
 
 	idx = 0;
-	draw_wall(vars, img[0]);
+	draw_ground(vars, vars->ground);
 	while (vars->map[idx])
 	{
 		if (vars->map[idx] == 'P')
 		{
-			put_img(vars, img[1], idx);
-			vars->player = idx;
+			put_img(vars, vars->player, idx);
+			vars->position = idx;
 		}
 		else if (vars->map[idx] == 'C')
-			put_img(vars, img[2], idx);
+			put_img(vars, vars->item, idx);
 		else if (vars->map[idx] == 'E')
-			put_img(vars, img[3], idx);
+			put_img(vars, vars->exit, idx);
+		else if (vars->map[idx] == '1')
+			put_img(vars, vars->wall, idx);
 		idx++;
 	}
 }
